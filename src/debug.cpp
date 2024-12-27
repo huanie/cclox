@@ -1,8 +1,5 @@
 module;
-#include <cstdio>
-#include <string>
-#include <string_view>
-#include <variant>
+import std.compat;
 import chunk;
 module debug;
 namespace Lox {

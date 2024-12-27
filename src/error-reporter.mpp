@@ -1,7 +1,5 @@
 module;
-#include <exception>
-#include <string>
-#include <utility>
+import std;
 import token;
 export module error_reporter;
 

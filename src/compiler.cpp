@@ -1,12 +1,5 @@
 module;
-#include <cstdlib>
-#include <limits>
-#include <optional>
-#include <stdexcept>
-#include <string>
-#include <string_view>
-#include <unordered_set>
-#include <utility>
+import std.compat;
 import error_reporter;
 import chunk;
 import token;

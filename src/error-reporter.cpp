@@ -1,6 +1,5 @@
 module;
-#include <iomanip>
-#include <iostream>
+import std;
 module error_reporter;
 namespace {
   constexpr auto resetText = "\033[0m";

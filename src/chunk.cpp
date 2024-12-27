@@ -1,8 +1,5 @@
 module;
-#include <cstddef>
-#include <utility>
-#include <variant>
-
+import std.compat;
 import token;
 
 module chunk;

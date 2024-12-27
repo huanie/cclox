@@ -1,9 +1,5 @@
 module;
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <variant>
+import std.compat;
 import error_reporter;
 import chunk;
 module vm;

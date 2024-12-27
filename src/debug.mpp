@@ -1,6 +1,6 @@
 module;
 
-#include <string_view>
+import std.compat;
 import chunk;
 export module debug;
 

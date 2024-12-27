@@ -1,12 +1,6 @@
 module;
 
-#include <cstddef>
-#include <string>
-#include <unordered_map>
-#include <utility>
-#include <variant>
-#include <vector>
-
+import std.compat;
 import token;
 export module chunk;
 
