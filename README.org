@@ -5,29 +5,26 @@ Hardware:
 
 Environment:
 - LLVM 19.1.6
-* O0
-** base
+* base
 2.6s parsing
 0.2s codegen
-** pch of common used stl headers
+* pch of common used stl headers
 1.2s parsing
 0.2s codegen
-** unity build
+* unity build
 0.6s parsing
 0.2s codegen
-** modules
+* modules
 requires dependency analysis which might make build slower
-*** cmake ninja
+** cmake ninja
 3.3s parsing
 0.2s codegen
-**** import std
+*** import std
 1.3s parsing
 0.2s codegen
-*** xmake
+** xmake
 2.8s parsing
 0.2s codegen
-**** import std
+*** import std
 0.6s parsing
 0.2s codegen
-* O3
-** base
