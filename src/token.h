@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string_view>
-
 namespace Lox {
   enum class TokenType {
     // single-character tokens

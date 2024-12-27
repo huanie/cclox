@@ -2,7 +2,6 @@
 #include "debug.h"
 
 #include "chunk.h"
-#include <cstdio>
 
 namespace Lox {
   void ChunkPrinter::print(const Chunk& chunk, std::string_view name) {

@@ -6,18 +6,9 @@
 #include "debug.h"
 #endif
 #include "error-reporter.h"
-#include <memory>
-#include <string>
-#include <string_view>
-#include <unordered_map>
-#include <vector>
 
 namespace Lox {
-  enum class ResultStatus {
-    OK,
-    StaticError,
-    DynamicError
-  };
+  enum class ResultStatus { OK, StaticError, DynamicError };
 
   class VM {
   public:
@@ -26,11 +17,14 @@ namespace Lox {
   private:
     void execute();
 
-    template<typename T> bool peekIs() const;
-    template<typename T> bool peekSecondIs() const;
+    template<typename T>
+    bool peekIs() const;
+    template<typename T>
+    bool peekSecondIs() const;
     Value pop();
 
-    template<typename T> T expect(std::string&& errorMessage, bool shouldPop);
+    template<typename T>
+    T expect(std::string&& errorMessage, bool shouldPop);
     double peekNumberOperand() { return expect<double>("Operand must be a number.", false); }
     double popNumberOperand() { return expect<double>("Operand must be a number.", true); }
     std::string peekStringOperand() { return expect<std::string>("Operand must be a string.", false); }

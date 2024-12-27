@@ -1,8 +1,6 @@
 #pragma once
 
 #include "token.h"
-#include <functional>
-#include <string_view>
 
 namespace Lox {
 

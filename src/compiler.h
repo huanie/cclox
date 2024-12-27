@@ -4,14 +4,6 @@
 #include "error-reporter.h"
 #include "scanner.h"
 #include "token.h"
-#include <functional>
-#include <memory>
-#include <optional>
-#include <string>
-#include <string_view>
-#include <unordered_map>
-#include <utility>
-#include <vector>
 
 namespace Lox {
 

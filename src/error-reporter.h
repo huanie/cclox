@@ -1,9 +1,6 @@
 #pragma once
 
 #include "token.h"
-#include <exception>
-#include <string>
-#include <utility>
 
 namespace Lox {
   struct LoxError : public std::exception {

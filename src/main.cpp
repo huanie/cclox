@@ -1,7 +1,4 @@
 #include "vm.h"
-#include <fstream>
-#include <iostream>
-#include <string>
 
 using namespace Lox;
 
@@ -18,9 +15,9 @@ namespace {
 
 int run(const std::string& source, unsigned line = 1) {
   const auto status = vm.interpret(source, line);
-  return
-    status == ResultStatus::StaticError ? staticErrorCode :
-    status == ResultStatus::DynamicError ? dynamicErrorCode : successCode;
+  return status == ResultStatus::StaticError ? staticErrorCode :
+    status == ResultStatus::DynamicError     ? dynamicErrorCode :
+                                               successCode;
 }
 
 int runFile(const char* path) {
@@ -35,13 +32,12 @@ int runFile(const char* path) {
 }
 
 int runPrompt() {
-  std::cout
-    << "This is a minimal Lox REPL for debug use.\n"
-    << "* Statements may not include line breaks.\n"
-    << "* Standalone expressions are not allowed.\n\n";
+  std::cout << "This is a minimal Lox REPL for debug use.\n"
+            << "* Statements may not include line breaks.\n"
+            << "* Standalone expressions are not allowed.\n\n";
 
   std::string source;
-  for (auto line = 1u; ; ++line) {
+  for (auto line = 1u;; ++line) {
     std::cout << "cclox:" << line << "> ";
     std::getline(std::cin, source);
     run(source, line);

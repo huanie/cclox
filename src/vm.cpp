@@ -1,9 +1,5 @@
 #include "vm.h"
 
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
-
 namespace Lox {
   static constexpr bool isTruthy(const Value& value) {
     return std::holds_alternative<bool>(value) ? std::get<bool>(value) : !std::holds_alternative<std::monostate>(value);
