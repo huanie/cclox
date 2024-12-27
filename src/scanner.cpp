@@ -1,8 +1,9 @@
-#include "scanner.h"
-
-#include "token.h"
+module;
+#include <functional>
+#include <string_view>
 #include <unordered_map>
-
+import token;
+module scanner;
 namespace {
   constexpr bool isWhitespace(char c) { return c == ' ' || c == '\t' || c == '\r' || c == '\n'; }
 
@@ -15,23 +16,12 @@ namespace {
 
 namespace Lox {
   static const std::unordered_map<std::string_view, TokenType> keywordTypes {
-    { "and", TokenType::And },
-    { "break", TokenType::Break },
-    { "class", TokenType::Class },
-    { "else", TokenType::Else },
-    { "false", TokenType::False },
-    { "fun", TokenType::Fun },
-    { "for", TokenType::For },
-    { "if", TokenType::If },
-    { "nil", TokenType::Nil },
-    { "or", TokenType::Or },
-    { "print", TokenType::Print },
-    { "return", TokenType::Return },
-    { "super", TokenType::Super },
-    { "this", TokenType::This },
-    { "true", TokenType::True },
-    { "var", TokenType::Var },
-    { "while", TokenType::While }
+    { "and", TokenType::And },     { "break", TokenType::Break }, { "class", TokenType::Class },
+    { "else", TokenType::Else },   { "false", TokenType::False }, { "fun", TokenType::Fun },
+    { "for", TokenType::For },     { "if", TokenType::If },       { "nil", TokenType::Nil },
+    { "or", TokenType::Or },       { "print", TokenType::Print }, { "return", TokenType::Return },
+    { "super", TokenType::Super }, { "this", TokenType::This },   { "true", TokenType::True },
+    { "var", TokenType::Var },     { "while", TokenType::While }
   };
 
   void Scanner::initialize(std::string_view source, unsigned line) {
@@ -98,9 +88,9 @@ namespace Lox {
         case '"':
           return scanString();
         default:
-          return
-            isDigit(next) ? scanNumber() :
-            isAlpha(next) ? scanIdentifierOrKeyword() : errorToken("Unexpected character.");
+          return isDigit(next) ? scanNumber() :
+            isAlpha(next)      ? scanIdentifierOrKeyword() :
+                                 errorToken("Unexpected character.");
       }
     }
   }
@@ -130,33 +120,21 @@ namespace Lox {
     return token(pair == keywordTypes.cend() ? TokenType::Identifier : pair->second);
   }
 
-  constexpr Token Scanner::token(TokenType type) const {
-    return Token { type, lexeme(), tokenLine_, tokenColumn_ };
-  }
+  constexpr Token Scanner::token(TokenType type) const { return Token { type, lexeme(), tokenLine_, tokenColumn_ }; }
 
-  constexpr Token Scanner::eofToken() const {
-    return Token { TokenType::Eof, {}, line_, offset_ - lineStart_ };
-  }
+  constexpr Token Scanner::eofToken() const { return Token { TokenType::Eof, {}, line_, offset_ - lineStart_ }; }
 
   constexpr Token Scanner::errorToken(std::string_view message) const {
     return Token { TokenType::Error, message, line_, offset_ - lineStart_ };
   }
 
-  constexpr std::string_view Scanner::lexeme() const {
-    return source_.substr(tokenOffset_, offset_ - tokenOffset_);
-  }
+  constexpr std::string_view Scanner::lexeme() const { return source_.substr(tokenOffset_, offset_ - tokenOffset_); }
 
-  constexpr bool Scanner::isAtEnd() const {
-    return offset_ >= source_.size();
-  }
+  constexpr bool Scanner::isAtEnd() const { return offset_ >= source_.size(); }
 
-  constexpr char Scanner::peek() const {
-    return offset_ >= source_.size() ? '\0' : source_[offset_];
-  }
+  constexpr char Scanner::peek() const { return offset_ >= source_.size() ? '\0' : source_[offset_]; }
 
-  constexpr char Scanner::peekSecond() const {
-    return offset_ + 1 >= source_.size() ? '\0' : source_[offset_ + 1];
-  }
+  constexpr char Scanner::peekSecond() const { return offset_ + 1 >= source_.size() ? '\0' : source_[offset_ + 1]; }
 
   char Scanner::advance() {
     const auto next = source_[offset_++];

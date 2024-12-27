@@ -1,6 +1,5 @@
-#pragma once
+module;
 
-#include "token.h"
 #include <cstddef>
 #include <string>
 #include <unordered_map>
@@ -8,7 +7,10 @@
 #include <variant>
 #include <vector>
 
-namespace Lox {
+import token;
+export module chunk;
+
+export namespace Lox {
 
   using Value = std::variant<std::monostate, bool, double, std::string>;
 

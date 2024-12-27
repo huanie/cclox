@@ -1,8 +1,7 @@
-#include "error-reporter.h"
-
+module;
 #include <iomanip>
 #include <iostream>
-
+module error_reporter;
 namespace {
   constexpr auto resetText = "\033[0m";
   constexpr auto redText = "\033[31m";
@@ -16,10 +15,9 @@ namespace Lox {
 
   void ErrorReporter::report(unsigned line, unsigned column, const std::string& message, bool isDynamic) {
     const auto stage = isDynamic ? "runtime" : "syntax";
-    std::cerr
-      << redText << std::setw(8) << stage << " error  " << resetText
-      << message
-      << greyText << " (" << line << ':' << column << ")\n" << resetText;
+    std::cerr << redText << std::setw(8) << stage << " error  " << resetText << message << greyText << " (" << line
+              << ':' << column << ")\n"
+              << resetText;
 
     errorCount_++;
   }
@@ -29,7 +27,5 @@ namespace Lox {
     std::cerr << errorCount_ << " error" << suffix << " identified.\n";
   }
 
-  void ErrorReporter::reset() {
-    errorCount_ = 0;
-  }
+  void ErrorReporter::reset() { errorCount_ = 0; }
 }

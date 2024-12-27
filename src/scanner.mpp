@@ -1,10 +1,11 @@
-#pragma once
+module;
 
-#include "token.h"
 #include <functional>
 #include <string_view>
+import token;
+export module scanner;
 
-namespace Lox {
+export namespace Lox {
 
   class Scanner {
   public:

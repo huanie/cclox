@@ -1,6 +1,11 @@
-#include "chunk.h"
+module;
+#include <cstddef>
+#include <utility>
+#include <variant>
 
-#include "token.h"
+import token;
+
+module chunk;
 
 namespace Lox {
   void Chunk::write(OpCode opCode, const Token& token) {

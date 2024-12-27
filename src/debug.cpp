@@ -1,9 +1,10 @@
-#ifndef NDEBUG
-#include "debug.h"
-
-#include "chunk.h"
+module;
 #include <cstdio>
-
+#include <string>
+#include <string_view>
+#include <variant>
+import chunk;
+module debug;
 namespace Lox {
   void ChunkPrinter::print(const Chunk& chunk, std::string_view name) {
     printf("== %s ==\n", name.data());
@@ -125,4 +126,3 @@ namespace Lox {
     }
   }
 }
-#endif

@@ -1,23 +1,20 @@
-#include "compiler.h"
-
-#include "error-reporter.h"
+module;
 #include <cstdlib>
 #include <limits>
+#include <optional>
 #include <stdexcept>
+#include <string>
+#include <string_view>
 #include <unordered_set>
-
+#include <utility>
+import error_reporter;
+import chunk;
+import token;
+module compiler;
 namespace Lox {
   static const std::unordered_set<TokenType> statementOpeners {
-    TokenType::LeftBrace,
-    TokenType::Break,
-    TokenType::Class,
-    TokenType::Fun,
-    TokenType::For,
-    TokenType::If,
-    TokenType::Print,
-    TokenType::Return,
-    TokenType::Var,
-    TokenType::While
+    TokenType::LeftBrace, TokenType::Break, TokenType::Class,  TokenType::Fun, TokenType::For,
+    TokenType::If,        TokenType::Print, TokenType::Return, TokenType::Var, TokenType::While
   };
 
   std::unique_ptr<Chunk> Compiler::compile(std::string_view source, unsigned line) {
@@ -63,9 +60,7 @@ namespace Lox {
     emit(OpCode::Constant, token, static_cast<std::byte>(index));
   }
 
-  void Compiler::emitPop() {
-    emit(OpCode::Pop, peek_);
-  }
+  void Compiler::emitPop() { emit(OpCode::Pop, peek_); }
 
   size_t Compiler::emitJump(OpCode opCode, const Token& token) {
     emit(opCode, token, static_cast<std::byte>(0xff));
@@ -97,10 +92,8 @@ namespace Lox {
 
     for (auto it = locals_.crbegin(); it != locals_.crend() && it->second == scopeDepth_; ++it) {
       if (it->first == identifier.lexeme) {
-        throw LoxError {
-          identifier,
-          "Identifier '" + std::string { identifier.lexeme } + "' is already declared in this scope."
-        };
+        throw LoxError { identifier,
+                         "Identifier '" + std::string { identifier.lexeme } + "' is already declared in this scope." };
       }
     }
 
@@ -115,10 +108,8 @@ namespace Lox {
   void Compiler::resolveLocal(const Token& identifier) {
     if (pendingLocal_ && *pendingLocal_ == identifier.lexeme) {
       pendingLocal_.reset();
-      throw LoxError {
-        identifier,
-        "Identifier '" + std::string { identifier.lexeme } + "' is referenced in its own declaration."
-      };
+      throw LoxError { identifier,
+                       "Identifier '" + std::string { identifier.lexeme } + "' is referenced in its own declaration." };
     }
 
     for (auto i = locals_.size(); i-- > 0;) {
@@ -129,9 +120,7 @@ namespace Lox {
     }
   }
 
-  void Compiler::beginScope() {
-    scopeDepth_++;
-  }
+  void Compiler::beginScope() { scopeDepth_++; }
 
   void Compiler::endScope() {
     while (locals_.size() > 0 && locals_.back().second == scopeDepth_) {
@@ -332,9 +321,7 @@ namespace Lox {
     expectSemicolon();
   }
 
-  void Compiler::parseExpression() {
-    parseAssignment();
-  }
+  void Compiler::parseExpression() { parseAssignment(); }
 
   void Compiler::parseAssignment() {
     parseTernary();
@@ -410,28 +397,21 @@ namespace Lox {
   }
 
   void Compiler::parseComparison() {
-    static const OperatorMap comparisons {
-      { TokenType::Greater, OpCode::Greater },
-      { TokenType::GreaterEqual, OpCode::GreaterEqual },
-      { TokenType::Less, OpCode::Less },
-      { TokenType::LessEqual, OpCode::LessEqual }
-    };
+    static const OperatorMap comparisons { { TokenType::Greater, OpCode::Greater },
+                                           { TokenType::GreaterEqual, OpCode::GreaterEqual },
+                                           { TokenType::Less, OpCode::Less },
+                                           { TokenType::LessEqual, OpCode::LessEqual } };
     parseBinary(&Compiler::parseAdditive, comparisons);
   }
 
   void Compiler::parseAdditive() {
-    static const OperatorMap additives {
-      { TokenType::Plus, OpCode::Add },
-      { TokenType::Minus, OpCode::Subtract }
-    };
+    static const OperatorMap additives { { TokenType::Plus, OpCode::Add }, { TokenType::Minus, OpCode::Subtract } };
     parseBinary(&Compiler::parseMultiplicative, additives);
   }
 
   void Compiler::parseMultiplicative() {
-    static const OperatorMap multiplicatives {
-      { TokenType::Star, OpCode::Multiply },
-      { TokenType::Slash, OpCode::Divide }
-    };
+    static const OperatorMap multiplicatives { { TokenType::Star, OpCode::Multiply },
+                                               { TokenType::Slash, OpCode::Divide } };
     parseBinary(&Compiler::parseUnary, multiplicatives);
   }
 
@@ -449,10 +429,7 @@ namespace Lox {
   }
 
   void Compiler::parseUnary() {
-    static const OperatorMap unaries {
-      { TokenType::Minus, OpCode::Negative },
-      { TokenType::Bang, OpCode::Not }
-    };
+    static const OperatorMap unaries { { TokenType::Minus, OpCode::Negative }, { TokenType::Bang, OpCode::Not } };
 
     const auto op = unaries.find(peek_.type);
     if (op == unaries.cend()) return parsePrimary();
@@ -486,10 +463,9 @@ namespace Lox {
         parseNumber();
         return;
       default:
-        throw LoxError {
-          peek_,
-          isAtEnd() ? "Unexpected end of input." : "Unexpected token '" + std::string { peek_.lexeme } + "'."
-        };
+        throw LoxError { peek_,
+                         isAtEnd() ? "Unexpected end of input." :
+                                     "Unexpected token '" + std::string { peek_.lexeme } + "'." };
     }
   }
 
@@ -522,13 +498,9 @@ namespace Lox {
     emitConstant(number, token);
   }
 
-  constexpr bool Compiler::isAtEnd() const {
-    return peekIs(TokenType::Eof);
-  }
+  constexpr bool Compiler::isAtEnd() const { return peekIs(TokenType::Eof); }
 
-  constexpr bool Compiler::peekIs(TokenType type) const {
-    return peek_.type == type;
-  }
+  constexpr bool Compiler::peekIs(TokenType type) const { return peek_.type == type; }
 
   Token Compiler::advance() {
     const auto token = peek_;
@@ -567,17 +539,12 @@ namespace Lox {
 
   void Compiler::synchronizeStatement(bool inBlock) {
     for (;; advance()) {
-      const auto isSynchronized =
-        isAtEnd() ||
-        advanceIf(TokenType::Semicolon) ||
-        (peekIs(TokenType::RightBrace) && inBlock) ||
-        statementOpeners.find(peek_.type) != statementOpeners.cend();
+      const auto isSynchronized = isAtEnd() || advanceIf(TokenType::Semicolon) ||
+        (peekIs(TokenType::RightBrace) && inBlock) || statementOpeners.find(peek_.type) != statementOpeners.cend();
 
       if (isSynchronized) break;
     }
   }
 
-  constexpr void Compiler::error() const {
-    errorReporter_.report(peek_.line, peek_.column, peek_.lexeme.data());
-  }
+  constexpr void Compiler::error() const { errorReporter_.report(peek_.line, peek_.column, peek_.lexeme.data()); }
 }

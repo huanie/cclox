@@ -1,11 +1,11 @@
-#pragma once
-
-#include "token.h"
+module;
 #include <exception>
 #include <string>
 #include <utility>
+import token;
+export module error_reporter;
 
-namespace Lox {
+export namespace Lox {
   struct LoxError : public std::exception {
     LoxError(const Token& token, std::string&& message)
       : line(token.line), column(token.column), message(std::move(message)) {}

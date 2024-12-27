@@ -1,9 +1,10 @@
-#pragma once
+module;
 
-#include "chunk.h"
 #include <string_view>
+import chunk;
+export module debug;
 
-namespace Lox {
+export namespace Lox {
 
   class ChunkPrinter {
   public:

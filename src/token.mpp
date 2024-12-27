@@ -1,8 +1,10 @@
-#pragma once
+module;
 
 #include <string_view>
 
-namespace Lox {
+export module token;
+
+export namespace Lox {
   enum class TokenType {
     // single-character tokens
     LeftParen,

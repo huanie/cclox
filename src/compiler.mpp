@@ -1,9 +1,5 @@
-#pragma once
+module;
 
-#include "chunk.h"
-#include "error-reporter.h"
-#include "scanner.h"
-#include "token.h"
 #include <functional>
 #include <memory>
 #include <optional>
@@ -13,7 +9,12 @@
 #include <utility>
 #include <vector>
 
-namespace Lox {
+import chunk;
+import error_reporter;
+import scanner;
+import token;
+export module compiler;
+export namespace Lox {
 
   class Compiler {
   public:

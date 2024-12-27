@@ -1,9 +1,12 @@
-#include "vm.h"
-
+module;
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
-
+#include <string>
+#include <variant>
+import error_reporter;
+import chunk;
+module vm;
 namespace Lox {
   static constexpr bool isTruthy(const Value& value) {
     return std::holds_alternative<bool>(value) ? std::get<bool>(value) : !std::holds_alternative<std::monostate>(value);
@@ -216,11 +219,8 @@ namespace Lox {
     valueStack_.pop_back();
     return value;
   }
-
-  template<typename T>
-  T VM::expect(std::string&& errorMessage, bool shouldPop) {
-    if (!peekIs<T>()) throw LoxError { chunk_->getPosition(offset_), std::move(errorMessage) };
-
-    return std::get<T>(shouldPop ? pop() : valueStack_.back());
-  }
+  double VM::peekNumberOperand() { return expect<double>("Operand must be a number.", false); }
+  double VM::popNumberOperand() { return expect<double>("Operand must be a number.", true); }
+  std::string VM::peekStringOperand() { return expect<std::string>("Operand must be a string.", false); }
+  std::string VM::popStringOperand() { return expect<std::string>("Operand must be a string.", true); }
 }
