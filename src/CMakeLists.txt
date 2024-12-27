@@ -1,4 +1,5 @@
 add_executable(cclox)
+target_precompile_headers(cclox PRIVATE pch.h)
 target_sources(cclox
 PRIVATE
 chunk.cpp
