@@ -1,6 +1,7 @@
 add_executable(cclox)
 target_sources(cclox
 PRIVATE
+extern_templates.cpp
 chunk.cpp
 chunk.h
 compiler.cpp

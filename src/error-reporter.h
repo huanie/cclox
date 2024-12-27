@@ -4,7 +4,9 @@
 #include <exception>
 #include <string>
 #include <utility>
-
+namespace std {
+  extern template class std::basic_string<char>;
+}
 namespace Lox {
   struct LoxError : public std::exception {
     LoxError(const Token& token, std::string&& message)

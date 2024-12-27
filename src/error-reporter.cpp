@@ -8,7 +8,9 @@ namespace {
   constexpr auto redText = "\033[31m";
   constexpr auto greyText = "\033[90m";
 }
-
+namespace std {
+  extern template class std::basic_string<char>;
+}
 namespace Lox {
   void ErrorReporter::report(const LoxError& error, bool isDynamic) {
     report(error.line, error.column, error.message, isDynamic);
@@ -16,10 +18,9 @@ namespace Lox {
 
   void ErrorReporter::report(unsigned line, unsigned column, const std::string& message, bool isDynamic) {
     const auto stage = isDynamic ? "runtime" : "syntax";
-    std::cerr
-      << redText << std::setw(8) << stage << " error  " << resetText
-      << message
-      << greyText << " (" << line << ':' << column << ")\n" << resetText;
+    std::cerr << redText << std::setw(8) << stage << " error  " << resetText << message << greyText << " (" << line
+              << ':' << column << ")\n"
+              << resetText;
 
     errorCount_++;
   }
@@ -29,7 +30,5 @@ namespace Lox {
     std::cerr << errorCount_ << " error" << suffix << " identified.\n";
   }
 
-  void ErrorReporter::reset() {
-    errorCount_ = 0;
-  }
+  void ErrorReporter::reset() { errorCount_ = 0; }
 }

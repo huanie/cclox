@@ -12,7 +12,9 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
+namespace std {
+  extern template class std::basic_string<char>;
+}
 namespace Lox {
 
   class Compiler {

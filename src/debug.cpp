@@ -3,7 +3,9 @@
 
 #include "chunk.h"
 #include <cstdio>
-
+namespace std {
+  extern template class std::basic_string<char>;
+}
 namespace Lox {
   void ChunkPrinter::print(const Chunk& chunk, std::string_view name) {
     printf("== %s ==\n", name.data());

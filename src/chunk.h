@@ -7,11 +7,18 @@
 #include <utility>
 #include <variant>
 #include <vector>
-
+namespace std {
+  extern template class std::basic_string<char>;
+  extern template struct variant<std::monostate, bool, double, std::string>;
+}
 namespace Lox {
-
   using Value = std::variant<std::monostate, bool, double, std::string>;
-
+}
+namespace std {
+  extern template struct vector<std::byte>;
+  extern template struct vector<Lox::Value>;
+}
+namespace Lox {
   enum class OpCode : unsigned char {
     Constant,
     Nil,
