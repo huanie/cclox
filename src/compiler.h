@@ -1,6 +1,7 @@
 #pragma once
 
 #include "chunk.h"
+#include "error-reporter.h"
 #include "scanner.h"
 #include "token.h"
 #include <functional>
@@ -13,12 +14,10 @@
 #include <vector>
 
 namespace Lox {
-  class ErrorReporter;
 
   class Compiler {
   public:
-    explicit Compiler(ErrorReporter& errorReporter)
-      : errorReporter_(errorReporter) {}
+    explicit Compiler(ErrorReporter& errorReporter) : errorReporter_(errorReporter) {}
 
     std::unique_ptr<Chunk> compile(std::string_view source, unsigned line);
 

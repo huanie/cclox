@@ -1,9 +1,9 @@
 #pragma once
 
+#include "chunk.h"
 #include <string_view>
 
 namespace Lox {
-  class Chunk;
 
   class ChunkPrinter {
   public:

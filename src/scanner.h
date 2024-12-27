@@ -1,11 +1,10 @@
 #pragma once
 
+#include "token.h"
 #include <functional>
 #include <string_view>
 
 namespace Lox {
-  enum class TokenType;
-  struct Token;
 
   class Scanner {
   public:

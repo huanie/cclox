@@ -1,5 +1,6 @@
 #pragma once
 
+#include "token.h"
 #include <cstddef>
 #include <string>
 #include <unordered_map>
@@ -8,7 +9,6 @@
 #include <vector>
 
 namespace Lox {
-  struct Token;
 
   using Value = std::variant<std::monostate, bool, double, std::string>;
 
