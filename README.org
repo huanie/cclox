@@ -2,6 +2,9 @@
 Hardware:
 - M3 Pro
 - 18GB RAM
+
+Environment:
+- LLVM 19.1.6
 * base
 2.6s parsing
 0.2s codegen
