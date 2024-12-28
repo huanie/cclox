@@ -8,6 +8,7 @@ Environment:
 * base
 2.6s parsing
 0.2s codegen
+44ms linking
 * pch of common used stl headers
 1.2s parsing
 0.2s codegen
