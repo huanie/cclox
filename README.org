@@ -1,31 +1,13 @@
-* Various build speed measurements
-Hardware:
-- M3 Pro
-- 18GB RAM
+Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz   1.80 GHz
+8GB RAM
+clang-18
 
-Environment:
-- LLVM 19.1.6
-* base
-2.6s parsing
-0.2s codegen
-44ms linking
-* pch of common used stl headers
-1.2s parsing
-0.2s codegen
-* unity build
-0.6s parsing
-0.2s codegen
-* modules
-requires dependency analysis which might make build slower
-** cmake ninja
-3.3s parsing
-0.2s codegen
-*** import std
-1.3s parsing
-0.2s codegen
-** xmake
-2.8s parsing
-0.2s codegen
-*** import std
-0.6s parsing
-0.2s codegen
+* Only object files
+0.020582 Total ExecuteLinker
+~20ms
+* Static Linking
+0.042678 Total ExecuteLinker
+~42ms
+* Dyanmic Linking
+0.018668 Total ExecuteLinker
+~18ms
