@@ -20,5 +20,4 @@ ${CMAKE_SOURCE_DIR}/src/vm.h)
 target_sources(cclox
 PRIVATE
 ${CMAKE_SOURCE_DIR}/src/main.cpp)
-
 target_link_libraries(cclox lib)

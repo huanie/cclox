@@ -2,12 +2,9 @@ Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz   1.80 GHz
 8GB RAM
 clang-18
 
-* Only object files
-0.020582 Total ExecuteLinker
-~20ms
 * Static Linking
-0.042678 Total ExecuteLinker
-~42ms
+static linking lib and stdlib
+
+0.084923s Total ExecuteLinker
 * Dyanmic Linking
-0.018668 Total ExecuteLinker
-~18ms
+0.017883s Total ExecuteLinker
