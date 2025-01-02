@@ -8,3 +8,13 @@ static linking lib and stdlib
 0.084923s Total ExecuteLinker
 * Dyanmic Linking
 0.017883s Total ExecuteLinker
+
+* only linking object files and dynamic link stdlib
+0.023582s Total ExecuteLinker
+
+generally more fluctuations but it's always about 20ms - 30ms
+
+* only link object files and static link stdlib
+0.077044s Total ExecuteLinker
+
+also fluctuations, between 70ms and 80ms
