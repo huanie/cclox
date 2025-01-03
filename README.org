@@ -1,20 +1,18 @@
-Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz   1.80 GHz
-8GB RAM
-clang-18
+AMD Ryzen 5 2600 Six-Core @ 12x 3.4GHz
+16GB RAM
+gcc 13.2.0
+Ubuntu 24.04
 
-* Static Linking
-static linking lib and stdlib
+object files are static library, also linking stdlib statically
 
-0.084923s Total ExecuteLinker
-* Dyanmic Linking
-0.017883s Total ExecuteLinker
+* gnu ld
+159.8 ms
 
-* only linking object files and dynamic link stdlib
-0.023582s Total ExecuteLinker
+* gnu gold
+92.5 ms
 
-generally more fluctuations but it's always about 20ms - 30ms
+* llvm lld
+57.0 ms
 
-* only link object files and static link stdlib
-0.077044s Total ExecuteLinker
-
-also fluctuations, between 70ms and 80ms
+* mold
+38.5 ms
