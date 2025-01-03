@@ -1,20 +1,16 @@
-Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz   1.80 GHz
-8GB RAM
-clang-18
+AMD Ryzen 5 2600 Six-Core @ 12x 3.4GHz
+16GB RAM
+gcc-13.2.0
 
 * Static Linking
 static linking lib and stdlib
 
-0.084923s Total ExecuteLinker
+0.033757 Total ExecuteLinker
 * Dyanmic Linking
-0.017883s Total ExecuteLinker
+0.014543 Total ExecuteLinker
 
 * only linking object files and dynamic link stdlib
-0.023582s Total ExecuteLinker
-
-generally more fluctuations but it's always about 20ms - 30ms
+0.014025 Total ExecuteLinker
 
 * only link object files and static link stdlib
-0.077044s Total ExecuteLinker
-
-also fluctuations, between 70ms and 80ms
+0.032548 Total ExecuteLinker
