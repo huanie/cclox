@@ -5,12 +5,12 @@ gcc-13.2.0
 * Static Linking
 static linking lib and stdlib
 
-0.033757 Total ExecuteLinker
+ 57.6 ms
 * Dyanmic Linking
-0.014543 Total ExecuteLinker
+34.7 ms
 
 * only linking object files and dynamic link stdlib
-0.014025 Total ExecuteLinker
+33.4 ms Total ExecuteLinker
 
 * only link object files and static link stdlib
-0.032548 Total ExecuteLinker
+57.8 ms
