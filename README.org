@@ -3,14 +3,12 @@ AMD Ryzen 5 2600 Six-Core @ 12x 3.4GHz
 gcc-13.2.0
 
 * Object File Library
+these times are for only linking main.o with lib
 ** Dynamic stdlib
 *** Dynamic Object File Library
-93.5ms
+72.5ms
 *** Static Object File library
 119.3ms
-** Static stdlib
-*** Static Object File library
-182ms
 * dynamic link stdlib
 114.6ms
 
