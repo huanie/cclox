@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.10.2)
 project(cclox)
-add_definitions(-ftime-trace)
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_LINK_EXECUTABLE "hyperfine '${CMAKE_CXX_LINK_EXECUTABLE}'")
-add_link_options(-fuse-ld=lld)
+
 add_subdirectory(src)
