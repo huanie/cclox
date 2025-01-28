@@ -1,13 +1,8 @@
 add_executable(cclox)
 
-add_library(lib STATIC)
-
 target_sources(cclox
 PRIVATE
-${CMAKE_SOURCE_DIR}/src/main.cpp)
-
-target_sources(lib
-PRIVATE
+${CMAKE_SOURCE_DIR}/src/main.cpp
 ${CMAKE_SOURCE_DIR}/src/chunk.cpp
 ${CMAKE_SOURCE_DIR}/src/chunk.h
 ${CMAKE_SOURCE_DIR}/src/compiler.cpp
@@ -22,4 +17,4 @@ ${CMAKE_SOURCE_DIR}/src/token.h
 ${CMAKE_SOURCE_DIR}/src/vm.cpp
 ${CMAKE_SOURCE_DIR}/src/vm.h)
 
-target_link_libraries(cclox lib)
+target_link_libraries(cclox -static)

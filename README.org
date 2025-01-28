@@ -10,7 +10,7 @@ these times are for only linking main.o with lib
 *** Static Object File library
 91.8ms
 * dynamic link stdlib
-114.6ms
+88.6ms
 
 * static link stdlib
-177.9ms
+155.9ms
