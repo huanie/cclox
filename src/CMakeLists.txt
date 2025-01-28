@@ -1,6 +1,6 @@
 add_executable(cclox)
 
-add_library(lib SHARED)
+add_library(lib STATIC)
 
 target_sources(cclox
 PRIVATE
