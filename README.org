@@ -2,11 +2,15 @@ AMD Ryzen 5 2600 Six-Core @ 12x 3.4GHz
 16GB RAM
 gcc-13.2.0
 
-* Object File Library (dynamic stdlib)
-** Dynamic Object File Library
+* Object File Library
+** Dynamic stdlib
+*** Dynamic Object File Library
 93.5ms
-** Static Object File library
+*** Static Object File library
 119.3ms
+** Static stdlib
+*** Static Object File library
+182ms
 * dynamic link stdlib
 114.6ms
 

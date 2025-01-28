@@ -23,3 +23,5 @@ ${CMAKE_SOURCE_DIR}/src/vm.cpp
 ${CMAKE_SOURCE_DIR}/src/vm.h)
 
 target_link_libraries(cclox lib)
+target_link_libraries(cclox -static)
+target_link_libraries(lib -static)
