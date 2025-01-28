@@ -16,4 +16,3 @@ ${CMAKE_SOURCE_DIR}/src/scanner.h
 ${CMAKE_SOURCE_DIR}/src/token.h
 ${CMAKE_SOURCE_DIR}/src/vm.cpp
 ${CMAKE_SOURCE_DIR}/src/vm.h)
-target_link_libraries(cclox -static -static-libgcc -static-libstdc++)

@@ -10,7 +10,7 @@ static linking lib and stdlib
 34.7 ms
 
 * dynamic link stdlib
-33.4 ms Total ExecuteLinker
+114.6ms
 
 * static link stdlib
 177.9ms
